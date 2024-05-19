@@ -25,8 +25,8 @@ namespace TaskManagement.Controllers
             return tasks;
         }
 
-        // GET: api/<TasksController>
-        [HttpGet("GetXId")]
+        // GET: api/<TasksController>/GetXId
+        [HttpGet("GetXId/{Id}")]
         public IEnumerable<Tasks> GetXId(Guid Id)
         {
             List<Tasks> tasks = _context.Tasks.Where(x => x.Id == Id).ToList();
@@ -34,17 +34,31 @@ namespace TaskManagement.Controllers
             return tasks;
         }
 
-        // GET api/<TasksController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET: api/<TasksController>/GetXDate
+        [HttpGet("GetXDate/{Date}")]
+        public IEnumerable<Tasks> GetXDate(DateTime Date)
         {
-            return "value";
+            DateTime initialDate = Date.Date;
+            DateTime endDate = Date.Date.AddDays(1);
+            List<Tasks> tasks = _context.Tasks.Where(x => x.DueDate > initialDate && x.DueDate < endDate).ToList();
+
+            return tasks;
         }
 
         // POST api/<TasksController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Tasks Post([FromBody] Tasks Task)
         {
+            DateTime now = DateTime.Now;
+
+            if (Task.DueDate < now)
+            {
+                return null;
+            }
+
+            Task = _context.Tasks.Add(Task).Entity;
+            _context.SaveChanges();
+            return Task;
         }
 
         // PUT api/<TasksController>/5
