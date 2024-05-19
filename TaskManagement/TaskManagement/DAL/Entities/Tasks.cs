@@ -11,7 +11,7 @@ namespace TaskManagement.DAL.Entities
 
         [Display(Name = "Descripción de la tarea")] //Para identificar el nombre mucho mas facil.
         [MaxLength(100, ErrorMessage = "El campo {0} debe tener máximo {1} caracteres.")] //Longitud maxima
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
 
         //Este atributo no se ingresa.
@@ -31,6 +31,7 @@ namespace TaskManagement.DAL.Entities
     //    public DateTime DueDate { get; set; }
     //    public DateTime CreateDate { get; set; }
     //    public DateTime CompletionDate { get; set; }
-    //}
+    }
+
 }
     

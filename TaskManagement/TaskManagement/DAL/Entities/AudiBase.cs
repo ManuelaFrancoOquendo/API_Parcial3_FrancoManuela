@@ -10,7 +10,8 @@ namespace TaskManagement.DAL.Entities
         
         public virtual DateTime? CreatedDate { get; set; } // para guardar nuevo con su fecha de creacion.
         
-        public virtual DateTime? ModifiedDate { get; set; } // para guardar todo registro que se modifico con su fecha de modificacion.
+        public virtual DateTime? DueDate { get; set; } // para guardar todo registro que se modifico con su fecha de Vencimiento.
 
+        public virtual DateTime? CompletionDate { get; set; } //Fecha de finalizacion de la tarea   
     }
 }
