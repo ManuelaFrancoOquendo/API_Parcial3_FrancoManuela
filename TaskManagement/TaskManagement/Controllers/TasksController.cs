@@ -50,7 +50,8 @@ namespace TaskManagement.Controllers
         public Tasks Post([FromBody] Tasks Task)
         {
             DateTime now = DateTime.Now;
-
+            Task.IsCompleted = false;
+            Task.CompletionDate = null;
             if (Task.DueDate < now)
             {
                 return null;
@@ -71,6 +72,7 @@ namespace TaskManagement.Controllers
                 return;
             }
             Tasks.CompletionDate = DateTime.Now;
+            Tasks.IsCompleted = true;
             _context.Tasks.Update(Tasks);
             _context.SaveChanges();
         }
