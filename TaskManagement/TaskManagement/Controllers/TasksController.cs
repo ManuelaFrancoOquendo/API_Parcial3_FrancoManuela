@@ -76,9 +76,20 @@ namespace TaskManagement.Controllers
         }
 
         // DELETE api/<TasksController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{Id}")]
+        public string Delete(Guid Id)
         {
+            string response = "La tarea aún está sin completar";
+            Tasks Tasks = _context.Tasks.SingleOrDefault(x => x.Id == Id);
+            if (Tasks is null)
+            {
+                return response;
+            }
+            if (Tasks.CompletionDate is null)
+            {
+                return response;
+            }
+            return "Eliminado";
         }
     }
 }
