@@ -12,6 +12,6 @@ namespace TaskManagement.DAL.Entities
         
         public virtual DateTime DueDate { get; set; } // para guardar todo registro que se modifico con su fecha de Vencimiento.
 
-        public virtual DateTime CompletionDate { get; set; } //Fecha de finalizacion de la tarea   
+        public virtual DateTime? CompletionDate { get; set; } //Fecha de finalizacion de la tarea   
     }
 }

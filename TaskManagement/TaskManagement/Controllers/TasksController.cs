@@ -62,9 +62,17 @@ namespace TaskManagement.Controllers
         }
 
         // PUT api/<TasksController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("ToComplete")]
+        public void ToComplete([FromBody] Tasks Tasks)
         {
+            Tasks = _context.Tasks.SingleOrDefault(x => x.Id == Tasks.Id);
+            if (Tasks is null)
+            {
+                return;
+            }
+            Tasks.CompletionDate = DateTime.Now;
+            _context.Tasks.Update(Tasks);
+            _context.SaveChanges();
         }
 
         // DELETE api/<TasksController>/5
